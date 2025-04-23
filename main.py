@@ -1,10 +1,15 @@
+import time
+
+
 def main():
     print("starting main")
-    text=input("enter some text")
-    print("writing text to file")
-    text=int(text)
-    with open("text.txt",'w') as f:
-        f.write(str(text))
+    i=0
+    while True:
+        time.sleep(0.01)
+        i+=1
+        if i==1001:
+            raise Exception("i too high")
+    print("i=",i)
     print("done")
 
 

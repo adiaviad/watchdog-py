@@ -7,16 +7,18 @@ def startWatchdog(args,maxTimeWithoutResponseSec):
     while True:
         time.sleep(maxTimeWithoutResponseSec)
         if process.poll() is not None:
-            print("killing subprocess")
+            print("watchdog not fed. killing subprocess")
             process.kill()
             outs, errs= process.communicate()
             print("subprocess stdout:", outs)
             print("subprocess error(s):", errs)
             process = subprocess.Popen(args=args)
+        else:
+            print("watchdog fed")
 
 def main():
     args=["python", "main.py"]
-    startWatchdog(args,30)
+    startWatchdog(args,1)
 
 if __name__=="__main__":
     main()
